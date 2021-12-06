@@ -83,14 +83,5 @@ public class Author {
     @ManyToMany(mappedBy = "authors")
     private Set<Book> books = new HashSet<>();
 
-    public Set<Publisher> getPublishers() {
-        return publishers;
-    }
 
-    public void setPublishers(Set<Publisher> publishers) {
-        this.publishers = publishers;
-    }
-
-    @ManyToMany(mappedBy = "authors")
-    private Set<Publisher> publishers = new HashSet<>();
 }

@@ -21,6 +21,17 @@ public class Book {
         this.title = title;
     }
 
+    @Override
+    public String toString() {
+        return "Book{" +
+                "id=" + id +
+                ", isbn='" + isbn + '\'' +
+                ", title='" + title + '\'' +
+                ", authors=" + authors +
+                ", publisher=" + publisher +
+                '}';
+    }
+
     public Long getId() {
         return id;
     }
@@ -53,15 +64,7 @@ public class Book {
         return Objects.equals(id, book.id);
     }
 
-    @Override
-    public String toString() {
-        return "Book{" +
-                "id=" + id +
-                ", isbn='" + isbn + '\'' +
-                ", title='" + title + '\'' +
-                ", authors=" + authors +
-                '}';
-    }
+
 
     @Override
     public int hashCode() {
@@ -84,14 +87,15 @@ public class Book {
     @JoinTable(name = "author_book", joinColumns = @JoinColumn(name = "book_id"),inverseJoinColumns = @JoinColumn(name="author_id"))
     private Set<Author> authors = new HashSet<>();
 
-    public Set<Publisher> getPublishers() {
-        return publishers;
+
+    public Publisher getPublisher() {
+        return publisher;
     }
 
-    public void setPublishers(Set<Publisher> publishers) {
-        this.publishers = publishers;
+    public void setPublisher(Publisher publisher) {
+        this.publisher = publisher;
     }
 
-    @ManyToMany(cascade = CascadeType.ALL)
-    private Set<Publisher> publishers = new HashSet<>();
+    @ManyToOne(cascade = CascadeType.ALL)
+    private Publisher publisher = new Publisher();
 }

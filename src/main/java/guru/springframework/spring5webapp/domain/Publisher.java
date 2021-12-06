@@ -30,14 +30,6 @@ public class Publisher {
         this.publicationName = publicationName;
     }
 
-    public Set<Author> getAuthors() {
-        return authors;
-    }
-
-    public void setAuthors(Set<Author> authors) {
-        this.authors = authors;
-    }
-
     public Set<Book> getBooks() {
         return books;
     }
@@ -56,7 +48,6 @@ public class Publisher {
         return "Publisher{" +
                 "id=" + id +
                 ", publicationName='" + publicationName + '\'' +
-                ", authors=" + authors +
                 ", books=" + books +
                 '}';
     }
@@ -78,11 +69,7 @@ public class Publisher {
         this.publicationName = publicationName;
     }
 
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "publisher_authors",joinColumns = @JoinColumn(name = "publisher_id"),inverseJoinColumns = @JoinColumn(name = "author_id"))
-    private Set<Author> authors = new HashSet<>();
-
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "publisher_books",joinColumns = @JoinColumn(name = "publisher_id"), inverseJoinColumns = @JoinColumn(name = "book_id"))
+    @OneToMany
+    @JoinColumn(name = "published_id")
     private Set<Book> books = new HashSet<>();
 }
